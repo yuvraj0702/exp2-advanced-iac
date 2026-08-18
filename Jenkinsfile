@@ -20,11 +20,6 @@ pipeline {
         stage('Checkout') {
             steps { checkout scm }
         }
-        stage('Test Masking') {
-    steps {
-        bat 'echo %AWS_SECRET_ACCESS_KEY%'
-    }
-}
         stage('Validate') {
             steps {
                 bat 'terraform fmt -check -recursive -diff'
