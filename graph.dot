@@ -1,0 +1,91 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] module.compute.aws_instance.db (expand)" [label = "module.compute.aws_instance.db", shape = "box"]
+		"[root] module.compute.aws_instance.web (expand)" [label = "module.compute.aws_instance.web", shape = "box"]
+		"[root] module.network.aws_internet_gateway.igw (expand)" [label = "module.network.aws_internet_gateway.igw", shape = "box"]
+		"[root] module.network.aws_route_table.public (expand)" [label = "module.network.aws_route_table.public", shape = "box"]
+		"[root] module.network.aws_route_table_association.public (expand)" [label = "module.network.aws_route_table_association.public", shape = "box"]
+		"[root] module.network.aws_security_group.db (expand)" [label = "module.network.aws_security_group.db", shape = "box"]
+		"[root] module.network.aws_security_group.web (expand)" [label = "module.network.aws_security_group.web", shape = "box"]
+		"[root] module.network.aws_subnet.private (expand)" [label = "module.network.aws_subnet.private", shape = "box"]
+		"[root] module.network.aws_subnet.public (expand)" [label = "module.network.aws_subnet.public", shape = "box"]
+		"[root] module.network.aws_vpc.main (expand)" [label = "module.network.aws_vpc.main", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.admin_cidr" [label = "var.admin_cidr", shape = "note"]
+		"[root] var.ami_id" [label = "var.ami_id", shape = "note"]
+		"[root] var.key_name" [label = "var.key_name", shape = "note"]
+		"[root] var.web_count" [label = "var.web_count", shape = "note"]
+		"[root] module.compute (close)" -> "[root] module.compute.output.db_private_ip (expand)"
+		"[root] module.compute (close)" -> "[root] module.compute.output.web_public_ips (expand)"
+		"[root] module.compute.aws_instance.db (expand)" -> "[root] module.compute.var.ami_id (expand)"
+		"[root] module.compute.aws_instance.db (expand)" -> "[root] module.compute.var.db_sg_id (expand)"
+		"[root] module.compute.aws_instance.db (expand)" -> "[root] module.compute.var.instance_type (expand)"
+		"[root] module.compute.aws_instance.db (expand)" -> "[root] module.compute.var.private_subnet_id (expand)"
+		"[root] module.compute.aws_instance.web (expand)" -> "[root] module.compute.var.ami_id (expand)"
+		"[root] module.compute.aws_instance.web (expand)" -> "[root] module.compute.var.instance_type (expand)"
+		"[root] module.compute.aws_instance.web (expand)" -> "[root] module.compute.var.key_name (expand)"
+		"[root] module.compute.aws_instance.web (expand)" -> "[root] module.compute.var.public_subnet_id (expand)"
+		"[root] module.compute.aws_instance.web (expand)" -> "[root] module.compute.var.web_count (expand)"
+		"[root] module.compute.aws_instance.web (expand)" -> "[root] module.compute.var.web_sg_id (expand)"
+		"[root] module.compute.output.db_private_ip (expand)" -> "[root] module.compute.aws_instance.db (expand)"
+		"[root] module.compute.output.web_public_ips (expand)" -> "[root] module.compute.aws_instance.web (expand)"
+		"[root] module.compute.var.ami_id (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.ami_id (expand)" -> "[root] var.ami_id"
+		"[root] module.compute.var.db_sg_id (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.db_sg_id (expand)" -> "[root] module.network.output.db_sg_id (expand)"
+		"[root] module.compute.var.instance_type (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.key_name (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.key_name (expand)" -> "[root] var.key_name"
+		"[root] module.compute.var.private_subnet_id (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.private_subnet_id (expand)" -> "[root] module.network.output.private_subnet_id (expand)"
+		"[root] module.compute.var.public_subnet_id (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.public_subnet_id (expand)" -> "[root] module.network.output.public_subnet_id (expand)"
+		"[root] module.compute.var.web_count (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.web_count (expand)" -> "[root] var.web_count"
+		"[root] module.compute.var.web_sg_id (expand)" -> "[root] module.compute (expand)"
+		"[root] module.compute.var.web_sg_id (expand)" -> "[root] module.network.output.web_sg_id (expand)"
+		"[root] module.network (close)" -> "[root] module.network.aws_route_table_association.public (expand)"
+		"[root] module.network (close)" -> "[root] module.network.output.db_sg_id (expand)"
+		"[root] module.network (close)" -> "[root] module.network.output.private_subnet_id (expand)"
+		"[root] module.network (close)" -> "[root] module.network.output.public_subnet_id (expand)"
+		"[root] module.network (close)" -> "[root] module.network.output.web_sg_id (expand)"
+		"[root] module.network.aws_internet_gateway.igw (expand)" -> "[root] module.network.aws_vpc.main (expand)"
+		"[root] module.network.aws_route_table.public (expand)" -> "[root] module.network.aws_internet_gateway.igw (expand)"
+		"[root] module.network.aws_route_table_association.public (expand)" -> "[root] module.network.aws_route_table.public (expand)"
+		"[root] module.network.aws_route_table_association.public (expand)" -> "[root] module.network.aws_subnet.public (expand)"
+		"[root] module.network.aws_security_group.db (expand)" -> "[root] module.network.aws_security_group.web (expand)"
+		"[root] module.network.aws_security_group.web (expand)" -> "[root] module.network.aws_vpc.main (expand)"
+		"[root] module.network.aws_security_group.web (expand)" -> "[root] module.network.var.admin_cidr (expand)"
+		"[root] module.network.aws_subnet.private (expand)" -> "[root] module.network.aws_vpc.main (expand)"
+		"[root] module.network.aws_subnet.private (expand)" -> "[root] module.network.var.private_az (expand)"
+		"[root] module.network.aws_subnet.private (expand)" -> "[root] module.network.var.private_subnet_cidr (expand)"
+		"[root] module.network.aws_subnet.public (expand)" -> "[root] module.network.aws_vpc.main (expand)"
+		"[root] module.network.aws_subnet.public (expand)" -> "[root] module.network.var.public_az (expand)"
+		"[root] module.network.aws_subnet.public (expand)" -> "[root] module.network.var.public_subnet_cidr (expand)"
+		"[root] module.network.aws_vpc.main (expand)" -> "[root] module.network.var.vpc_cidr (expand)"
+		"[root] module.network.aws_vpc.main (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] module.network.output.db_sg_id (expand)" -> "[root] module.network.aws_security_group.db (expand)"
+		"[root] module.network.output.private_subnet_id (expand)" -> "[root] module.network.aws_subnet.private (expand)"
+		"[root] module.network.output.public_subnet_id (expand)" -> "[root] module.network.aws_subnet.public (expand)"
+		"[root] module.network.output.web_sg_id (expand)" -> "[root] module.network.aws_security_group.web (expand)"
+		"[root] module.network.var.admin_cidr (expand)" -> "[root] module.network (expand)"
+		"[root] module.network.var.admin_cidr (expand)" -> "[root] var.admin_cidr"
+		"[root] module.network.var.private_az (expand)" -> "[root] module.network (expand)"
+		"[root] module.network.var.private_subnet_cidr (expand)" -> "[root] module.network (expand)"
+		"[root] module.network.var.public_az (expand)" -> "[root] module.network (expand)"
+		"[root] module.network.var.public_subnet_cidr (expand)" -> "[root] module.network (expand)"
+		"[root] module.network.var.vpc_cidr (expand)" -> "[root] module.network (expand)"
+		"[root] output.db_private_ip (expand)" -> "[root] module.compute.output.db_private_ip (expand)"
+		"[root] output.web_public_ips (expand)" -> "[root] module.compute.output.web_public_ips (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.compute.aws_instance.db (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.compute.aws_instance.web (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] module.network.aws_route_table_association.public (expand)"
+		"[root] root" -> "[root] module.compute (close)"
+		"[root] root" -> "[root] module.network (close)"
+		"[root] root" -> "[root] output.db_private_ip (expand)"
+		"[root] root" -> "[root] output.web_public_ips (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
