@@ -44,12 +44,12 @@ resource "aws_security_group" "web" {
   description = "HTTP from the internet, SSH from the admin network only"
   vpc_id      = aws_vpc.main.id
 
-  #tfsec:ignore:aws-ec2-no-public-ingress-sgr
   ingress {
     description = "HTTP from anywhere"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
+    #tfsec:ignore:aws-ec2-no-public-ingress-sgr
     cidr_blocks = ["0.0.0.0/0"]
   }
 
