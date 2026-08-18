@@ -10,6 +10,8 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION    = 'ap-south-1'
         TF_IN_AUTOMATION      = 'true'
+        TF_VAR_admin_cidr     = credentials('admin-cidr')
+        TF_VAR_ami_id         = credentials('ami-id')
     }
     stages {
         stage('Checkout') {
