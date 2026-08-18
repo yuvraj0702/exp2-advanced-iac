@@ -6,6 +6,14 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [var.web_sg_id]
   key_name               = var.key_name
 
+  metadata_options {
+    http_tokens = "required"
+  }
+
+  root_block_device {
+    encrypted = true
+  }
+
   user_data = <<-EOF
     #!/bin/bash
     apt-get update -y
@@ -22,6 +30,14 @@ resource "aws_instance" "db" {
   instance_type          = var.instance_type
   subnet_id              = var.private_subnet_id
   vpc_security_group_ids = [var.db_sg_id]
+
+  metadata_options {
+    http_tokens = "required"
+  }
+
+  root_block_device {
+    encrypted = true
+  }
 
   tags = { Name = "db-01", Tier = "data" }
 }
