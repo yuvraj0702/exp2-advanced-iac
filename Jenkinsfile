@@ -57,6 +57,13 @@ pipeline {
             when { branch 'main' }
             steps { bat 'terraform apply -input=false tfplan' }
         }
+        stage('Destroy') {
+    when { branch 'main' }
+    steps {
+        input message: 'Destroy all resources?', ok: 'Destroy'
+        bat 'terraform destroy -input=false -auto-approve'
+    }
+}
     }
     post {
         success { echo 'Pipeline completed successfully.' }
