@@ -1,5 +1,13 @@
 pipeline {
     agent any
+    triggers {
+        pollSCM('H/5 * * * *')
+    }
+    options {
+        ansiColor('xterm')
+        timestamps()
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+    }
     options {
         ansiColor('xterm')
         timestamps()
